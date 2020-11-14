@@ -1,0 +1,86 @@
+dtmc
+
+const double n = 3;
+const double ep = 8;
+const double de = 0.6;
+const double q = ep/64/log(1/de,2.71828183);
+const double m = log (n/de, 10)/q/q;
+
+//2 red 1 blue
+const double blue = (1-q)*(1-q)*q;
+const double red = 1-blue;
+const double thre = log (1/de,2.781828183)/ep;
+
+
+const double d0 = thre - ((12-0)/4/m/q-1);
+const double d1 = thre - ((11-1)/4/m/q-1);
+const double d2 = thre - ((10-2)/4/m/q-1);
+const double d3 = thre - ((9-3)/4/m/q-1);
+const double d4 = thre - ((8-4)/4/m/q-1);
+const double d5 = thre - ((7-5)/4/m/q-1);
+const double d6 = thre - ((6-6)/4/m/q-1);
+const double d7 = d5;
+const double d8 = d4;
+const double d9 = d3;
+const double d10 = d2;
+const double d11 = d1;
+const double d12 = d0;
+
+const double p0 = (d0< 0) ? 1-0.5*pow(2.71828183,ep*d0): 0.5*pow(2.71828183,-ep*d0);
+const double p1 = (d1< 0) ? 1-0.5*pow(2.71828183,ep*d1): 0.5*pow(2.71828183,-ep*d1);
+const double p2 = (d2< 0) ? 1-0.5*pow(2.71828183,ep*d2): 0.5*pow(2.71828183,-ep*d2);
+const double p3 = (d3< 0) ? 1-0.5*pow(2.71828183,ep*d3): 0.5*pow(2.71828183,-ep*d3);
+const double p4 = (d4< 0) ? 1-0.5*pow(2.71828183,ep*d4): 0.5*pow(2.71828183,-ep*d4);
+const double p5 = (d5< 0) ? 1-0.5*pow(2.71828183,ep*d5): 0.5*pow(2.71828183,-ep*d5);
+const double p6 = (d6< 0) ? 1-0.5*pow(2.71828183,ep*d6): 0.5*pow(2.71828183,-ep*d6);
+const double p7 = p5;
+const double p8 = p4;
+const double p9 = p3;
+const double p10 = p2;
+const double p11 = p1;
+const double p12 = p0;
+
+module M1
+
+	
+
+	// records the value of red,
+	// starts with -1
+	// -4 outputs \bot, -3 outputs red, -2 outputs blue
+	d : [-4..12];
+
+	[] d=-1 -> (pow(blue,12)) :  (d'=0) +
+		(12*red*pow(blue,11)): (d'=1) + 
+		(66*pow(red,2)*pow(blue,10)): (d'=2) + 
+		(220*pow(red,3)*pow(blue,9)): (d'=3) + 
+		(495*pow(red,4)*pow(blue,8)): (d'=4) + 
+		(792*pow(red,5)*pow(blue,7)): (d'=5) + 
+		(924*pow(red,6)*pow(blue,6)): (d'=6) + 
+		(792*pow(red,7)*pow(blue,5)): (d'=7) + 
+		(495*pow(red,8)*pow(blue,4)): (d'=8) + 
+		(220*pow(red,9)*pow(blue,3)): (d'=9) + 
+		(66*pow(red,10)*pow(blue,2)): (d'=10) +
+ 		(12*pow(red,11)*pow(blue,1)): (d'=11) + 
+		(pow(red,12)): (d'=12);
+
+
+	[] d = 0 -> p0 : (d' = -2) + (1-p0) :(d' = -4);
+	[] d = 1 -> p1 : (d' = -2) + (1-p1) :(d' = -4);
+	[] d = 2 -> p2 : (d' = -2) + 1-p2 :(d' = -4);
+	[] d = 3 -> p3 : (d' = -2) + 1-p3 :(d' = -4);
+	[] d = 4 -> p4 : (d' = -2) + 1-p4 :(d' = -4);
+	[] d = 5 -> p5 : (d' = -2) + 1-p5 :(d' = -4);
+	[] d = 6 -> p6 : (d' = -3) + 1-p6 :(d' = -4);
+	[] d = 7 -> p7 : (d' = -3) + 1-p7 :(d' = -4);
+	[] d = 8 -> p8 : (d' = -3) + 1-p8 :(d' = -4);
+	[] d = 9 -> p9 : (d' = -3) + 1-p9 :(d' = -4);
+	[] d = 10 -> p10 : (d' = -3) + 1-p10 :(d' = -4);
+	[] d = 11 -> p11 : (d' = -3) + 1-p11 :(d' = -4);
+	[] d = 12 -> p12 : (d' = -3) + 1-p12 :(d' = -4);
+
+
+endmodule
+
+init d=-1 endinit
+
+

@@ -1,0 +1,19 @@
+D{1,0} [X ((d = -1) & (t = -1) )]
+
+P = ? [X X ((d = -1) )]
+
+P = ? [X X X ((d = -1) )]
+
+P = ? [X X X X ((d = -1) )]
+
+P = ? [X X X X X ((d = -1))]
+
+P = ? [X X X X X X ((d = -1) )]
+
+P = ? [X X X X X X X ((d = -1))]
+
+P = ? [X X X X X X X X ((d = -1) )]
+
+P = ? [X X X X X X X X X ((d = -1) )]
+
+P = ? [X X X X X X X X X X ((d = -1) )]
